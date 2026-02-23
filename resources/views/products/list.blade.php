@@ -62,7 +62,7 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 text-sm text-center">
-                                            <button class="text-indigo-600 hover:text-indigo-900 font-semibold mr-3">Edit</button>
+                                            <a href="{{ route('products.edit', $product->id) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold mr-3">Edit</a>
                                             <button class="text-red-600 hover:text-red-900 font-semibold">Delete</button>
                                         </td>
                                     </tr>
