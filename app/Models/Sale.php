@@ -18,6 +18,7 @@ class Sale extends Model
         'due_amount'
     ];
 
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
