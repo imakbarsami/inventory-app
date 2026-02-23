@@ -6,5 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class JournalItem extends Model
 {
-    //
+    protected $fillable = [
+        'journal_entry_id',
+        'account_id',
+        'debit',
+        'credit'
+    ];
+
+    public function journalEntry()
+    {
+        return $this->belongsTo(JournalEntry::class);
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

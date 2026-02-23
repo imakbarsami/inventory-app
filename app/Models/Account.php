@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-    //
+    protected $fillable = [
+        'name',
+        'type'
+    ];
+
+    public function journalItems()
+    {
+        return $this->hasMany(JournalItem::class);
+    }
 }
