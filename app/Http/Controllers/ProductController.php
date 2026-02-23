@@ -28,7 +28,7 @@ class ProductController extends Controller
             $query->orderBy($sortColumn, $sortDirection);
         }
 
-        $products = $query->paginate(10)->withQueryString();
+        $products = $query->paginate(5)->withQueryString();
         //dd($products);
         return view('products.list', compact('products'));
     }
@@ -169,6 +169,47 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Something went wrong! ' . $e->getMessage());
+        }
+    }
+    public function destroy(Product $product)
+    {
+        DB::beginTransaction();
+
+        try {
+            if ($product->stock > 0) {
+                $inventoryAccount = Account::where('name', 'Inventory')->first();
+                $cogsAccount = Account::where('name', 'Cost of Goods Sold (COGS)')->first();
+                
+                $lossValue = $product->stock * $product->purchase_price;
+
+                $journalEntry = JournalEntry::create([
+                    'date' => now()->toDateString(),
+                    'description' => "Stock written off due to product deletion: " . $product->name,
+                ]);
+
+                JournalItem::create([
+                    'journal_entry_id' => $journalEntry->id, 
+                    'account_id' => $cogsAccount->id, 
+                    'debit' => $lossValue, 
+                    'credit' => 0
+                ]);
+
+                JournalItem::create([
+                    'journal_entry_id' => $journalEntry->id, 
+                    'account_id' => $inventoryAccount->id, 
+                    'debit' => 0, 
+                    'credit' => $lossValue
+                ]);
+            }
+
+            $product->delete();
+
+            DB::commit();
+            return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Cannot delete this product. It might be linked to sales.');
         }
     }
 }

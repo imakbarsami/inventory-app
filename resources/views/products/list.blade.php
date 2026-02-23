@@ -23,7 +23,7 @@
                                 Search
                             </button>
                             
-                            @if(request('search'))
+                            @if(request('search') || request('sort') || request('direction'))
                                 <a href="{{ route('products.index') }}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500">
                                     Clear
                                 </a>
@@ -54,8 +54,8 @@
                                     <tr class="hover:bg-gray-50">
                                         <td class="px-6 py-4 text-sm text-gray-900">{{ $product->id }}</td>
                                         <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $product->name }}</td>
-                                        <td class="px-6 py-4 text-sm text-gray-900">{{ number_format($product->purchase_price, 2) }}</td>
-                                        <td class="px-6 py-4 text-sm text-gray-900">{{ number_format($product->sell_price, 2) }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-900">{{ number_format($product->purchase_price, 2) }} BDT</td>
+                                        <td class="px-6 py-4 text-sm text-gray-900">{{ number_format($product->sell_price, 2) }} BDT</td>
                                         <td class="px-6 py-4 text-sm">
                                             <span class="{{ $product->stock < 10 ? 'text-red-600 font-bold' : 'text-green-600' }}">
                                                 {{ $product->stock }}
@@ -63,7 +63,12 @@
                                         </td>
                                         <td class="px-6 py-4 text-sm text-center">
                                             <a href="{{ route('products.edit', $product->id) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold mr-3">Edit</a>
-                                            <button class="text-red-600 hover:text-red-900 font-semibold">Delete</button>
+                                           
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-900 font-semibold">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
