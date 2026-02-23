@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
@@ -8,10 +9,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create'); 
     Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');     
     Route::get('/sales/{sale}', [SaleController::class, 'show'])->name('sales.show');  
+
+    //dashboard route
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 });
 
