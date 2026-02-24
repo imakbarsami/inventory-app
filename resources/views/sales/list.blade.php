@@ -38,7 +38,7 @@
                                     Filter
                                 </button>
                                 
-                                @if(request('search') || request('start_date') || request('end_date'))
+                                @if(request('search') || request('start_date') || request('end_date') || request('sort') || request('direction'))
                                     <a href="{{ route('sales.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500">
                                         Clear
                                     </a>

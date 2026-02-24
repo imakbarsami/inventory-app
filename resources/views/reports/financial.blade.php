@@ -35,27 +35,48 @@
                 </form>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-blue-500">
-                    <div class="text-xs font-bold text-gray-400 uppercase">Total Sales (Net)</div>
-                    <div class="text-2xl font-black text-gray-800">BDT {{ number_format($totalSales, 2) }}</div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-red-400">
-                    <div class="text-xs font-bold text-gray-400 uppercase">Cost of Goods (COGS)</div>
-                    <div class="text-2xl font-black text-gray-800">BDT {{ number_format($totalCogs, 2) }}</div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-yellow-400">
-                    <div class="text-xs font-bold text-gray-400 uppercase">Total Discount</div>
-                    <div class="text-2xl font-black text-gray-800">BDT {{ number_format($totalDiscount, 2) }}</div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-green-500">
-                    <div class="text-xs font-bold text-gray-400 uppercase">Net Profit</div>
-                    <div class="text-2xl font-black {{ $netProfit >= 0 ? 'text-green-600' : 'text-red-600' }}">
-                        BDT {{ number_format($netProfit, 2) }}
-                    </div>
-                </div>
-            </div>
+            <div class="space-y-4 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-blue-500">
+            <div class="text-xs font-bold text-gray-400 uppercase">Total Sales</div>
+            <div class="text-2xl font-black text-gray-800">৳{{ number_format($totalSales, 2) }}</div>
+        </div>
 
+        <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-emerald-500">
+            <div class="text-xs font-bold text-gray-400 uppercase">Total Collected</div>
+            <div class="text-2xl font-black text-emerald-600">৳{{ number_format($totalCollected, 2) }}</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-orange-500">
+            <div class="text-xs font-bold text-gray-400 uppercase">Total Due</div>
+            <div class="text-2xl font-black text-orange-600">৳{{ number_format($totalDue, 2) }}</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-purple-500">
+            <div class="text-xs font-bold text-gray-400 uppercase">Total VAT</div>
+            <div class="text-2xl font-black text-purple-600">৳{{ number_format($totalVat, 2) }}</div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-red-400">
+            <div class="text-xs font-bold text-gray-400 uppercase">Cost of Goods (COGS)</div>
+            <div class="text-2xl font-black text-gray-800">৳{{ number_format($totalCogs, 2) }}</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-yellow-400">
+            <div class="text-xs font-bold text-gray-400 uppercase">Total Discount</div>
+            <div class="text-2xl font-black text-gray-800">৳{{ number_format($totalDiscount, 2) }}</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-indigo-700">
+            <div class="text-xs font-bold text-gray-400 uppercase">Net Profit</div>
+            <div class="text-2xl font-black {{ $netProfit >= 0 ? 'text-indigo-800' : 'text-red-600' }}">
+                ৳{{ number_format($netProfit, 2) }}
+            </div>
+        </div>
+    </div>
+</div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
                 <div class="p-6">
                     <h3 class="font-bold text-lg text-gray-700 mb-4">Daily Sales Summary</h3>

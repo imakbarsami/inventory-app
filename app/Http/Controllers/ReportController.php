@@ -35,6 +35,10 @@ class ReportController extends Controller
             ->orderBy('sale_date', 'desc')
             ->get();
 
+        $totalCollected = (clone $salesQuery)->sum('paid_amount');
+        $totalDue = (clone $salesQuery)->sum('due_amount');
+        $totalVat = (clone $salesQuery)->sum('vat');
+
         return view('reports.financial', compact(
             'totalSales', 
             'totalDiscount', 
@@ -43,7 +47,9 @@ class ReportController extends Controller
             'netProfit', 
             'startDate', 
             'endDate',
-            'dailyReports'
+            'dailyReports',
+            'totalCollected',
+            'totalDue'
         ));
     }
 }
