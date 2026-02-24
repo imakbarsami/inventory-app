@@ -1,59 +1,35 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Task 2: Inventory & Financial Reporting System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This repository contains the solution for **Task 2: Inventory & Financial Reporting**. It is a Laravel-based backend system built for an e-commerce seller panel to manage products, process sales, and easily track daily profit and loss.
 
-## About Laravel
+## 🌐 Live Demo & Credentials
+**Live Application:** [https://inventory-app-pgsl.onrender.com](https://inventory-app-pgsl.onrender.com) 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Test User Credentials:**
+- **Email:** admin@example.com
+- **Password:** password
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📂 Project Overview
+The main goal of this project is to keep track of product stock and provide accurate financial reports without complex accounting software. It automatically handles stock deduction, calculates VAT and discounts, and separates cash in hand from due amounts.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Key Features
+* **Smart Dashboard:** Gives a quick overview of Today's Sales, Total Inventory Value (based on buying price), and Total Cash Collected.
+* **Product & Stock Management:** Sellers can add products with both a `purchase_price` (Cost) and a `sell_price`. Stock automatically decreases when a sale is made.
+* **Sales Processing:** When adding a new sale, the system calculates everything perfectly:
+  * Applies Discount and adds VAT.
+  * Calculates the Net Amount.
+  * Tracks how much the customer paid (`paid_amount`) and how much is still due (`due_amount`).
+* **Detailed Financial Report:** A dedicated reporting page where users can filter records by date. It shows:
+  * Total Sales, Total Collected, and Total Due.
+  * Total VAT, Cost of Goods Sold (COGS), and Total Discount.
+  * **Net Profit** calculated accurately.
 
-## Learning Laravel
+## 🧮 How the Calculations Work (Core Logic)
+I kept the logic simple but highly accurate based on standard business math:
+1. **Inventory Value:** Calculated by multiplying the available stock by the purchase price of each product.
+   `Inventory Value = Stock × Purchase Price`
+2. **Cost of Goods Sold (COGS):** When a product is sold, the system calculates how much it originally cost the seller.
+   `COGS = Quantity Sold × Purchase Price`
+3. **Net Profit:** The final profit is calculated by taking the total sales and subtracting taxes, product costs, and given discounts.
+   `Net Profit = (Total Sales - Total VAT) - (COGS + Total Discount)`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
