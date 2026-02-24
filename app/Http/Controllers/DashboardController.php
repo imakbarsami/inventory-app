@@ -16,7 +16,8 @@ class DashboardController extends Controller
 
         $inventoryValue = Product::selectRaw('SUM(stock * purchase_price) as total_value')->first()->total_value ?? 0;
 
-        $cashBalance = Account::where('name', 'Cash')->first()->balance ?? 0;
+        $cashBalance = Sale::sum('paid_amount');
+        //dd($cashBalance);
 
         $recentSales = Sale::with('customer')->latest()->take(5)->get();
 
