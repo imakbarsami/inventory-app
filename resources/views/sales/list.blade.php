@@ -71,7 +71,7 @@
                                 @forelse ($sales as $sale)
                                     <tr class="hover:bg-gray-50">
                                         <td class="px-6 py-4 text-sm font-bold text-indigo-600">{{ $sale->invoice_no }}</td>
-                                        <td class="px-6 py-4 text-sm text-gray-900">{{ $sale->created_at->format('d M Y, h:i A') }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-900">{{ $sale->sale_date }}</td>
                                         <td class="px-6 py-4 text-sm text-gray-900">
                                             <div class="font-medium">{{ $sale->customer->name ?? 'Walk-in Customer' }}</div>
                                             <div class="text-xs text-gray-500">{{ $sale->customer->phone ?? '' }}</div>
